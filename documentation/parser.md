@@ -46,7 +46,7 @@ graph TD
 
     %% 2. O Atributo (A GRANDE MUDANÇA)
     %% Visualmente, é uma etiqueta ligada à definição
-    TagRabbit[@rabbit]:::attr
+    TagRabbit["@rabbit"]:::attr
     Func --> TagRabbit
 
     %% 3. Metadados normais

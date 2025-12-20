@@ -7,7 +7,7 @@ graph TD
     %% Estruturas
     FuncTable[FunctionTable]:::static
     Env[Environment]:::dynamic
-    RatC[RatCache]:::cache
+    RatC[RabbitCache]:::cache
 
     %% Relações
     Interpreter -->|Lê Receitas| FuncTable
@@ -54,7 +54,7 @@ graph TD
     %% O Ponto Chave
     Args --> CheckRat{Tem @rabbit?}:::check
     
-    %% Caminho do RATO
+    %% Caminho do Coelho
     CheckRat -- SIM --> CheckCache{Está no Cache?}:::cachehit
     CheckCache -- SIM --> ReturnCache[Retorna Valor Imediato]:::endnode
     
@@ -68,7 +68,7 @@ graph TD
     end
     
     RunBody --> ShouldSave{Tem @rabbit?}:::check
-    ShouldSave -- Sim --> Save[Salvar no RatCache]:::save
+    ShouldSave -- Sim --> Save[Salvar no RabbitCache]:::save
     Save --> Return[Retornar Resultado]:::endnode
     ShouldSave -- Não --> Return
 ```
