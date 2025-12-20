@@ -281,7 +281,7 @@ Subtipos:
     acessar variáveis externas (quando existirem)
     chamar funções builtin impuras (print, input)
 
-SnakeImpurityError: Function marked with @rhino performs impure operabbition.
+RhinoImpurityError: Function marked with @rhino performs impure operabbition.
 #### @rabbit
 
 - Funções @rabbit possuem cache automático
@@ -289,7 +289,7 @@ SnakeImpurityError: Function marked with @rhino performs impure operabbition.
     acesse funções não @rhino
     use operações impuras
 
-RatImpurityWarning: @rabbit cache may be unsafe. External access detected: symbol
+RabbitImpurityWarning: @rabbit cache may be unsafe. External access detected: symbol
 
 # 3.7 Builtins
 
