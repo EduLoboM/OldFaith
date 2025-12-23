@@ -1,12 +1,13 @@
 # 🩸🐑 Old Faith
 
-![Julia](https://img.shields.io/badge/Made_with-Julia-9558B2?style=for-the-badge&logo=julia&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Educational-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-2ea44f?style=for-the-badge)
-![Theme](https://img.shields.io/badge/Theme-Cult%20of%20the%20Lamb-red?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-Compiler%20Design-007EC6?style=for-the-badge)
-![Last Commit](https://img.shields.io/github/last-commit/EduLoboM/R-Core?style=for-the-badge&logo=github&color=red)
-![Stars](https://img.shields.io/github/stars/EduLoboM/R-Core?style=for-the-badge&color=yellow&logo=github)
+![Theme](https://img.shields.io/badge/Theme-Cult%20of%20the%20Lamb-8a0303?style=for-the-badge&labelColor=black)
+![Julia](https://img.shields.io/badge/Made_with-Julia-8a0303?style=for-the-badge&logo=julia&logoColor=white&labelColor=black)
+![License](https://img.shields.io/badge/License-MIT-8a0303?style=for-the-badge&labelColor=black)
+![Status](https://img.shields.io/badge/Status-Educational-8a0303?style=for-the-badge&labelColor=black)
+![Focus](https://img.shields.io/badge/Focus-Compiler%20Design-8a0303?style=for-the-badge&labelColor=black)
+![Last Commit](https://img.shields.io/github/last-commit/EduLoboM/OldFaith?style=for-the-badge&logo=github&color=8a0303&labelColor=black)
+![Stars](https://img.shields.io/github/stars/EduLoboM/OldFaith?style=for-the-badge&color=8a0303&logo=github&labelColor=black)
+![Forks](https://img.shields.io/github/forks/EduLoboM/OldFaith?style=for-the-badge&color=8a0303&logo=github&labelColor=black)
 
 > **Um projeto educacional de design de compiladores com temática inspirada em "Cult of the Lamb".**
 
@@ -63,7 +64,7 @@ graph LR
 ### Instalação
 
 ```bash
-git clone https://github.com/EduLoboM/R-Core
+git clone https://github.com/EduLoboM/OldFaith
 cd OldFaith
 ```
 
