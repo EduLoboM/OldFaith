@@ -1,8 +1,8 @@
 Pega o programa e o transforma em uma string e divide ela em tokens ("legos") para interpretação e exportação sendo eles:
 
 - Key-Words
-	- TOKEN_FUNC - func
-	- TOKEN_RETURN - return
+	- TOKEN_RITE - rite
+	- TOKEN_SACRIFICE - sacrifice
 
 - Identifiers and literals
 	- TOKEN_IDENT - x

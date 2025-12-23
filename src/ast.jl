@@ -8,8 +8,9 @@ module AST
 
     export ASTNode, Expression, Statement
     export Literal, Variable, BinaryExpression, CallExpression, TernaryExpression
-    export FunctionDef, Program
 
+    export RiteDef, Program
+    
     struct Literal <: Expression
         value::Any
     end
@@ -35,7 +36,7 @@ module AST
         false_expression::Expression
     end
 
-    struct FunctionDef <: Statement
+    struct RiteDef <: Statement
         name::String
         params::Vector{String}
         attributes::Vector{String}
@@ -43,7 +44,7 @@ module AST
     end
 
     struct Program <: ASTNode
-        functions::Vector{FunctionDef}
+        rites::Vector{RiteDef}
         script::Vector{ASTNode}
     end
     

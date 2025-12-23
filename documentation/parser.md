@@ -19,21 +19,21 @@ graph TD
 ```
 Gráfico 1: Síntese da lógica do parser.jl
 
-Daqui pra frente para melhor explicar a lógica desse programa vamos udar de exemplo a função @rabbit addmult(a, b, c) que tem a tag @rabbit e retorna os valores de a + b * c
+Daqui pra frente para melhor explicar a lógica desse programa vamos udar de exemplo o rito @shamura addmult(a, b, c) que tem a tag @shamura e sacrifica os valores de a + b * c
 
 ``` mermaid
 graph LR
     Input[Lista de Tokens] -->|parse_program| Loop{Enquanto não EOF}
-    Loop -->|Encontra @ ou func| Func[parse_function]
+    Loop -->|Encontra @ ou rite| Func[parse_rite]
     
-    Func -->|Lê Atributos| AttrList["@rabbit"]
-    Func -->|Lê Assinatura| Sig["func addmult(a,b,c)"]
+    Func -->|Lê Atributos| AttrList["@shamura"]
+    Func -->|Lê Assinatura| Sig["rite addmult(a,b,c)"]
     Func -->|Lê Corpo| Expr[parse_expression]
     
     Expr -->|Chama| Additive["1 + (2 * 3)"]
     Additive -->|Chama| Term[2 * 3]
     
-    Func -->|Monta| Node[Nó FunctionDef]
+    Func -->|Monta| Node[Nó RiteDef]
     Node -->|Adiciona na| AST["Árvore Final (Program)"]
 ```
 Gráfico 2: como o programa interpreta addmult(1, 2, 3)
@@ -41,12 +41,12 @@ Gráfico 2: como o programa interpreta addmult(1, 2, 3)
 ```mermaid
 graph TD
 
-    %% 1. A Raiz (A Função)
-    Func[FunctionDef: addmult]:::root
+    %% 1. A Raiz (O Rito)
+    Func[RiteDef: addmult]:::root
 
     %% 2. O Atributo (A GRANDE MUDANÇA)
     %% Visualmente, é uma etiqueta ligada à definição
-    TagRabbit["@rabbit"]:::attr
+    TagRabbit["@shamura"]:::attr
     Func --> TagRabbit
 
     %% 3. Metadados normais

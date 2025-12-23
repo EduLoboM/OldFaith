@@ -2,7 +2,7 @@ module Lexer
 
 export TokenType, Token, tokenize
 
-export TOKEN_FUNC, TOKEN_RETURN, TOKEN_EOF, TOKEN_INT, TOKEN_IDENT
+export TOKEN_RITE, TOKEN_SACRIFICE, TOKEN_EOF, TOKEN_INT, TOKEN_IDENT
 export TOKEN_LPAREN, TOKEN_RPAREN, TOKEN_LBRACE, TOKEN_RBRACE
 export TOKEN_COMMA, TOKEN_SEMICOLON, TOKEN_AT
 export TOKEN_PLUS, TOKEN_MINUS, TOKEN_STAR, TOKEN_SLASH, TOKEN_PERCENT, TOKEN_ASSIGN
@@ -10,8 +10,8 @@ export TOKEN_LT, TOKEN_GT, TOKEN_QUESTION, TOKEN_COLON
 
 @enum TokenType begin
     # Key-Words
-    TOKEN_FUNC      # func
-    TOKEN_RETURN    # return
+    TOKEN_RITE      # rite
+    TOKEN_SACRIFICE # sacrifice
     
     # Identifiers and literals
     TOKEN_IDENT     # x
@@ -83,10 +83,10 @@ function tokenize(source::String)
             end
             word = source[start:i-1]
             
-            type = if word == "func"
-                TOKEN_FUNC
-            elseif word == "return"
-                TOKEN_RETURN
+            type = if word == "rite"
+                TOKEN_RITE
+            elseif word == "sacrifice"
+                TOKEN_SACRIFICE
             else
                 TOKEN_IDENT
             end

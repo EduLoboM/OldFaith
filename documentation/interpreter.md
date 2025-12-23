@@ -1,75 +1,75 @@
-O Interpretador percorre a árvore AST gerada pelo Parser e executa as instruções. Ele usa o sistema de Multiple Dispatch do Julia para trabbitar cada tipo de nó (Literal, Binary, Call) de forma diferente.
+O Interpretador percorre a árvore sagrada (AST) e executa a vontade dos Bispos. Ele usa o sistema de Multiple Dispatch do Julia para tratar cada tipo de oferenda (Literal, Binary, Call) de forma apropriada.
 
 ```mermaid
 graph TD
-    Interpreter[Motor de Execução]:::runner
+    Interpreter[Executor da Fé]:::runner
 
     %% Estruturas
-    FuncTable[FunctionTable]:::static
-    Env[Environment]:::dynamic
-    RatC[RabbitCache]:::cache
+    RiteTable[RiteTable]:::static
+    Env[Altar Local]:::dynamic
+    ShamuraC[ShamuraCache]:::cache
 
     %% Relações
-    Interpreter -->|Lê Receitas| FuncTable
-    Interpreter -->|Lê/Grava Variáveis Locais| Env
-    Interpreter -->|Salva Resultados| RatC
+    Interpreter -->|Lê Ritos| RiteTable
+    Interpreter -->|Manipula Elementos Locais| Env
+    Interpreter -->|Consulta a Sabedoria| ShamuraC
 
     %% Descrições
-    DescTable["Dict: Nome -> AST (Somente Leitura)"] --> FuncTable
-    DescEnv["Dict: Variável -> Valor (Cria um novo por função)"] --> Env
-    DescCache["Dict: (Func, Args) -> Resultado (Memória Global do @rabbit)"] --> RatC
+    DescTable["Dict: Nome -> AST (Escrituras Sagradas)"] --> RiteTable
+    DescEnv["Dict: Variável -> Valor (Novo Altar por rito)"] --> Env
+    DescCache["Dict: (Rito, Args) -> Resultado (Memória de Shamura)"] --> ShamuraC
 ```
-Gráfico 1: Arquitetura de memória
+Gráfico 1: Arquitetura da Fé
 
 ```mermaid
 
 graph LR
 
     %% Entrada
-    Input[AST Node]:::input --> Dispatch{Qual o Tipo?}:::logic
+    Input[AST Node]:::input --> Dispatch{Qual a Natureza?}:::logic
 
     %% Caminhos
-    Dispatch -->|Literal| Lit["Retorna valor"]:::result
+    Dispatch -->|Literal| Lit["Revela Valor"]:::result
     
-    Dispatch -->|Variable| Var["Busca no Environment"]:::process
+    Dispatch -->|Variable| Var["Busca no Altar"]:::process
     Var --> ResVar[Valor da Var]:::result
 
-    Dispatch -->|Binary| Bin["Calcula Esq & Dir"]:::process
-    Bin --> Math["Aplica Operador"]:::process
-    Math --> ResBin[Resultado Matemático]:::result
+    Dispatch -->|Binary| Bin["Combina Forças"]:::process
+    Bin --> Math["Realiza Operação"]:::process
+    Math --> ResBin[Resultado]:::result
 
-    Dispatch -->|Ternary| Tern["Avalia Condição"]:::process
-    Tern -->|True| BranchA["Executa Lado True"]:::process
-    Tern -->|False| BranchB["Executa Lado False"]:::process
+    Dispatch -->|Ternary| Tern["Julga Condição"]:::process
+    Tern -->|True| BranchA["Caminho da Luz"]:::process
+    Tern -->|False| BranchB["Caminho das Trevas"]:::process
 
 ```
-Gráfico 2: Ciclo do evaluate (multiple dispatch)
+Gráfico 2: Ciclo de Avaliação
 
 ```mermaid
 graph TD
 
-    Start["Call: func(n)"]:::start --> CheckFunc{Função Existe?}:::check
-    CheckFunc -- Sim --> Args[Calcular Argumentos]:::calc
+    Start["Call: rite(n)"]:::start --> CheckRite{Rito Existe?}:::check
+    CheckRite -- Sim --> Args[Preparar Oferendas]:::calc
     
     %% O Ponto Chave
-    Args --> CheckRat{Tem @rabbit?}:::check
+    Args --> CheckShamura{Tem benção de @shamura?}:::check
     
     %% Caminho do Coelho
-    CheckRat -- SIM --> CheckCache{Está no Cache?}:::cachehit
-    CheckCache -- SIM --> ReturnCache[Retorna Valor Imediato]:::endnode
+    CheckShamura -- SIM --> CheckCache{Shamura Lembra?}:::cachehit
+    CheckCache -- SIM --> ReturnCache[Receber Profecia Imediata]:::endnode
     
     %% Caminho Lento (Cálculo)
     CheckCache -- NÃO --> CalcReal
-    CheckRat -- NÃO --> CalcReal
+    CheckShamura -- NÃO --> CalcReal
     
-    subgraph Execution [Execução Real]
-        CalcReal[Criar Novo Environment]:::calc
-        CalcReal --> RunBody[Rodar Corpo da Função]:::calc
+    subgraph Execution [Ritual Completo]
+        CalcReal[Erguer Novo Altar]:::calc
+        CalcReal --> RunBody[Realizar o Rito]:::calc
     end
     
-    RunBody --> ShouldSave{Tem @rabbit?}:::check
-    ShouldSave -- Sim --> Save[Salvar no RabbitCache]:::save
-    Save --> Return[Retornar Resultado]:::endnode
+    RunBody --> ShouldSave{Tem @shamura?}:::check
+    ShouldSave -- Sim --> Save[Consagrar na Memória de Shamura]:::save
+    Save --> Return[Sacrificar Resultado]:::endnode
     ShouldSave -- Não --> Return
 ```
-gráfico 3: Lógica do @rabbit
+Gráfico 3: Lógica de @shamura

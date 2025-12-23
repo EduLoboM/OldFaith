@@ -1,132 +1,102 @@
-# 🐇🦏🦌 R-Core
+# 🩸🐑 Old Faith
 
 ![Julia](https://img.shields.io/badge/Made_with-Julia-9558B2?style=for-the-badge&logo=julia&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Educational%20%2F%20Experimental-orange?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Educational-orange?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-2ea44f?style=for-the-badge)
+![Theme](https://img.shields.io/badge/Theme-Cult%20of%20the%20Lamb-red?style=for-the-badge)
 ![Focus](https://img.shields.io/badge/Focus-Compiler%20Design-007EC6?style=for-the-badge)
 ![Last Commit](https://img.shields.io/github/last-commit/EduLoboM/R-Core?style=for-the-badge&logo=github&color=red)
 ![Stars](https://img.shields.io/github/stars/EduLoboM/R-Core?style=for-the-badge&color=yellow&logo=github)
-![Forks](https://img.shields.io/github/forks/EduLoboM/R-Core?style=for-the-badge&color=blueviolet&logo=github)
 
-> **Uma linguagem de programação interpretada voltada ao estudo de design de compiladores, controle explícito de otimizações em tempo de execução e restrições funcionais via metadados.**
+> **Um projeto educacional de design de compiladores com temática inspirada em "Cult of the Lamb".**
 
-**R-Core** é um projeto educacional desenvolvido em **Julia**, focado na implementação de um *frontend completo de compilador* (Lexer, Parser e AST) integrado a um **interpretador determinístico**.
-O objetivo é explorar como **decisões de otimização, segurança e orçamento** podem ser delegadas ao programador/pesquisador por meio de **anotações explícitas simples**, mantendo o runtime simples, previsível e controlável.
+**Old Faith** é uma linguagem de programação interpretada desenvolvida em **Julia**, criada para estudar a implementação de um *frontend* de compilador (Lexer, Parser, AST) e um interpretador tree-walk.
 
-## 🚀 Principais Features
+A linguagem utiliza uma "skin" temática baseada no jogo **Cult of the Lamb**, onde conceitos técnicos de computação são mapeados para a lore do jogo para tornar o aprendizado mais engajante e memorável.
 
-R-Core foi projetada para ser minimalista na sintaxe, mas profunda nos conceitos.
+## 🎯 Objetivos Educacionais
 
-| Feature                                 | Descrição                                                                                                                                                                    | Status                 |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| **`@rabbit` — Memoization Explícita**   | Sistema de **memoization automática** controlado por anotação. Converte algoritmos recursivos exponenciais (ex.: Tribonacci) em execução linear usando cache no runtime.     | ✅ Implementada         |
-| **`@rhino` — Funções Puras**            | Impõe **pureza funcional**, proibindo efeitos colaterais, acesso global e mutações externas. Funciona como sandbox semântico.                                                | 🛠️ Em Desenvolvimento |
-| **`@reindeer` — Orçamento de Execução** | Anotação que define **limites explícitos de execução** (tempo ou repetições), permitindo **resultados aproximados ou melhor-esforço** sob regras determinísticas do runtime. | 🧭 Planejada           |
-| **Arquitetura Modular**                 | Uso extensivo de **Multiple Dispatch (Julia)** para separar AST, ambiente e execução, facilitando extensões futuras.                                                         | ✅ Implementada         |
-| **Parser Recursive Descent**            | Parser escrito manualmente, respeitando precedência matemática e associatividade, sem uso de ferramentas geradoras. Ideal para estudo de compiladores.                       | ✅ Implementada         |
+O projeto explora como **decisões de compilador** (como otimização e segurança) podem ser controladas explicitamente pelo programador através de metadados (anotações), em vez de serem "mágicas" implícitas do compilador.
 
-## 🏗️ Pipeline de Execução
+| Feature Técnica | Conceito Temático | Descrição |
+| :--- | :--- | :--- |
+| **Memoization Explícita** | `@shamura` | O sistema armazena resultados de chamadas de função (cache) para evitar recomputação. Transforma complexidade exponencial em linear. |
+| **Pure Functions / Sandbox** | `@kallamar` | Garante que a função não tenha efeitos colaterais e não acesse escopo global, permitindo execução segura. |
+| **Execution Budget** | `@heket` | *Planejado*. Limita o tempo de execução ou número de instruções para evitar loops infinitos. |
+| **Paralelismo/Threads** | `@leshy` | *Planejado*. O código cresce desordenadamente em várias direções (threads) para execução paralela. |
+| **Async/Await** | `@narinder` | *Planejado*. "Aquele Que Espera" pausa a execução até a promessa ser cumprida (concorrência assíncrona). |
 
-O fluxo de execução da R-Core segue um modelo clássico de frontend de compilador integrado a um interpretador:
+## 🔮 Roadmap Futuro
+
+* **v0.2** - Profecias em Texto (Strings e IO)
+* **v0.3** - `@kallamar` - Sandbox puro
+* **v0.4** - `@leshy` - Implementação de Threads e Paralelismo
+* **v0.5** - `@narinder` - Suporte a operações Async/Await
+* **v0.6** - `@heket` - Controle de Budget de execução
+
+## 🏗️ Pipeline do Compilador
+
+O fluxo de execução segue a arquitetura clássica de interpretação:
 
 ```mermaid
 graph LR
 
-    Source["Código Fonte (.rc)"]:::file --> Lexer[Lexer]:::process
+    Source["Código Fonte (.of)"]:::file --> Lexer[Lexer]:::process
     Lexer --> Parser[Parser]:::process
     Parser --> AST[AST]:::process
     AST --> Interpreter[Interpreter]:::process
 
     subgraph Runtime
         Interpreter --> Env[Ambiente Local]:::runtime
-        Interpreter --> RabbitCache[Cache @rabbit]:::runtime
+        Interpreter --> Cache[Cache]:::runtime
     end
 
     Interpreter --> Output[Saída]:::file
 ```
 
-## 🚅 Quick Start
+## 🚀 Como Executar
 
 ### Requisitos
 
-* **Julia** (versão estável mais recente)
+* **Julia** (versão 1.6 ou superior)
 
 ### Instalação
 
 ```bash
 git clone https://github.com/EduLoboM/R-Core
-cd R-Core
+cd OldFaith
 ```
 
-### Executando um Benchmark
+### Exemplo de Uso (Benchmark)
 
-O exemplo de uso da R-Core é o **Tribonacci recursivo**, demonstrando o impacto da anotação `@rabbit`:
+Para demonstrar a funcionalidade de memoização (`@shamura`), incluímos um benchmark usando a sequência de Tribonacci.
 
-```bash
-julia tests/tribonacci.jl
-```
+1.  Execute o arquivo de teste:
+    ```bash
+    julia tests/benchmark_prophecy.jl
+    ```
 
-**Saída final esperada:**
+2.  Exemplo de Código (`.of`):
+    ```julia
+    # A anotação @shamura ativa o cache (memoization)
+    @shamura
+    rite prophecy(n) {
+        # 'rite' é uma função, 'sacrifice' é o retorno
+        n < 3 ? sacrifice 1 : sacrifice prophecy(n-1) + prophecy(n-2) + prophecy(n-3);
+    }
+    ```
 
-```bash
---- 3. Interpreter ---
-  Iniciando cálculo de trib(30) com @rabbit ativado...
-  Cronometrando...
-  0.251128 seconds (722.61 k allocations: 34.837 MiB, 3.08% gc time, 99.86% compilation time)
+## 📚 Estrutura do Projeto
 
-  >> RESULTADO FINAL: 37895489
-```
-
-## 👾 Exemplo de Código
-
-A sintaxe da R-Core é inspirada em linguagens imperativas clássicas, com extensões semânticas via atributos:
-
-```julia
-@rabbit
-func trib(n) {
-    return n < 3
-        ? 1
-        : trib(n-1) + trib(n-2) + trib(n-3);
-}
-```
-
-A anotação `@rabbit` instrui o interpretador a **memorizar chamadas recursivas**, eliminando recomputações redundantes automaticamente.
-
-## 📚 Documentação Técnica
-
-A documentação detalha cada estágio do interpretador:
-
-1. [**Lexer**](documentation/lexer.md) — Tokenização e classificação léxica.
-2. [**Parser**](documentation/parser.md) — Construção da AST com precedência correta.
-3. [**AST**](documentation/ast.md) — Estrutura formal dos nós sintáticos.
-4. [**Interpreter**](documentation/interpreter.md) — Avaliação, escopo, ambiente e cache.
-5. [**LeanCeption**](documentation/architecture/LeanCeption.md) — Estudo do projeto e seus requisitos mínimos.
-6. [**Design**](documentation/architecture/Design.md) — Estudo da composição de camadas semânticas e design.
-
-
-## 🗺️ Roadmap
-
-* **v0.2**
-
-  * Suporte a strings
-  * Entrada e saída básica
-  * Mensagens de erro mais amigáveis
-
-* **v0.3**
-
-  * Implementação completa de `@rhino`
-  * Verificar se uma função `@rhino` tenta acessar variáveis globais
-  * Avisar quando `@rabbit` é usado em funções impuras
-
-* **v0.4**
-
-  * Introdução da anotação `@reindeer`
-  * Estratégias avançadas de execução controlada
-  * Gerar bytecode ou transpilar para Julia nativo
-  * Um terminal interativo para rodar comandos linha a linha
+* `src/ast.jl`: Definição das estruturas da Árvore Sintática (RiteDef, Expressions).
+* `src/lexer.jl`: Análise léxica e definição de tokens.
+* `src/parser.jl`: Parser descendente recursivo.
+* `src/interpreter.jl`: Lógica de execução, gerenciamento de memória e cache.
 
 ---
 
 <p align="center">
-Made with 💖 by <b>Eduardo Lôbo Moreira</b>
+Desenvolvido para fins de estudo com 💖 por<b>Eduardo Lôbo Moreira</b>.
+<br>
+<i>Inspirado pela estética de Massive Monster's Cult of the Lamb.</i>
 </p>

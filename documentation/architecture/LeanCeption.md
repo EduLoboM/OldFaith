@@ -1,6 +1,6 @@
 # 1.1 Problema Resolvido
 
-| **PROBLEMA**                                               | **ONDE DÓI HOJE** | **SOLUÇÃO NA R-CORE**                                 |
+| **PROBLEMA**                                               | **ONDE DÓI HOJE** | **SOLUÇÃO NA Old Faith**                                 |
 | ---------------------------------------------------------- | ----------------- | ---------------------------------------------------------- |
 | Não consigo mudar facilmente o comportamento de uma função | Todas             | Tem palavras que dão atributos de comportamento em funções |
 # 1.2 Features
@@ -35,32 +35,40 @@
 
 # 1.3 Atributos Iniciais
 
-- @rabbit
-    cache automático
+- @shamura
+    - cache automático
 
-- @rhino
-    função pura (não pode acessar nada externo)
+- @kallamar
+    - não pode acessar nada externo
+
+- @heket
+    - budget de funções
+
+- @leshy
+    - paralelismo (caos, threads)
+
+- @narinder
+    - async/await (espera de promessas)
 
 # 1.4 Especificação Informal
 
-A tag @rabbit vai servir especialmente para quando uma função é repetida várias vezes com os mesmos parâmetros, o que acelera as demais execuções mas com risco de erros (Warning: @rabbit cache may be unsafe.
-External access detected: global, impure_function), já o @rhino é uma medida de segurança de dados que deixa meu código previsível e seguro ao assegurar que a função so mexa com ela mesma ou com outras @rhino
+A tag @shamura vai servir especialmente para quando um rito é repetido várias vezes com os mesmos parâmetros, o que acelera as demais execuções mas com risco de erros, já o @kallamar é uma medida de segurança de dados que deixa meu código previsível e seguro ao assegurar que o rito so mexa com ele mesmo ou com outros @kallamar
 
 # 1.5 Exemplo de programa
 
-@rabbit
-func add(a, b) {
-    return a + b;
+@shamura
+rite add(a, b) {
+    sacrifice a + b;
 }
 
-@rhino
-func square(x) {
-    return x * x;
+@kallamar
+rite square(x) {
+    sacrifice x * x;
 }
 
-@rabbit @rhino
-func subtract(a, b) {
-    return a - b;
+@shamura @kallamar
+rite subtract(a, b) {
+    sacrifice a - b;
 }
 
 print(subtract(4, 5));
@@ -75,18 +83,18 @@ square(4);
 - ;?
     Obrigatório
 
-- func = Func?
+- rite = Rite?
     Case-sensitive
 
 # 2.2 Atributos
 
-Atributos antes da função ex.: @rabbit @rhino
+Atributos antes do rito ex.: @shamura @kallamar
 
 # 2.3 Exemplo de Função
 
 atributo*
-func IDENTIFIER ( parametros <- identificadores separados por , ) {
-    return expressao ;
+rite IDENTIFIER ( parametros <- identificadores separados por , ) {
+    sacrifice expressao ;
 }
 
 # 2.4 Expressões Permitidas
@@ -109,7 +117,7 @@ func IDENTIFIER ( parametros <- identificadores separados por , ) {
 - expressao % expressao
     Sim
 
-- chamada de função
+- chamada de rito
 	Sim
 
 - parênteses
@@ -125,7 +133,6 @@ Um programa consiste em zero ou mais definições de função seguidas de zero o
 - return fora de função
 - atributo sem função
 - chamada de função inexistente
-- função @rhino acessando variável ou função não @rhino
 
 # 3.1 Arquitetura
 
@@ -143,8 +150,8 @@ Verificador semântico [[interpreter.jl - Executador]]
 
 ### Palavras-chave
 
-- func
-- return
+- rite
+- sacrifice
 - print
 
 ### Símbolos
@@ -173,7 +180,7 @@ Verificador semântico [[interpreter.jl - Executador]]
 
 ### Identificadores
 
-- nome de função
+- nome de rito
 - nome de parâmetro
 - nome de variável
 
@@ -181,11 +188,11 @@ Verificador semântico [[interpreter.jl - Executador]]
 
 ### Progrma
 
-program ::= function_def* statement*
+program ::= rite_def* statement*
 
 ### Definição de Função
 
-function_def ::= attribute* "func" IDENT "(" params ")" block
+rite_def ::= attribute* "rite" IDENT "(" params ")" block
 
 ### Atributos
 
@@ -197,15 +204,15 @@ params ::= IDENT ("," IDENT)* | ε
 
 ### Bloco de Função
 
-block ::= "{" "return" expr ";" "}"
+block ::= "{" "sacrifice" expr ";" "}"
 
 ### Comandos (Statements)
 
-statement ::= function_call ";"
+statement ::= rite_call ";"
 
 ### Chamada de Função
 
-function_call ::= IDENT "(" args ")"
+rite_call ::= IDENT "(" args ")"
 
 args ::= expr ("," expr)* | ε
 
@@ -221,38 +228,38 @@ term ::= factor ("/" | "%" e etc) factor
 
 ### Fator
 
-factor ::= INTEGER | STRING | CHAR | function_call | "(" expr ")"
+factor ::= INTEGER | STRING | CHAR | rite_call | "(" expr ")"
 
-# 3.5 Árvore Sintática Abstrabbita (AST)
+# 3.5 Árvore Sintática Abstrata (AST)
 
 ### Nós da AST
 
 #### Program
 
-- functions: lista de FunctionDef
-- statements: lista de CallExpr
+- rites: lista de RiteDef
+- script: lista de ASTNode
 
-#### FunctionDef
+#### RiteDef
 
 - name: identificador
 - attributes: lista de Attribute
 - params: lista de identificadores
-- body: Return
+- body: Expression
 
 #### Attribute
 
-- name: identificador (rabbit, rhino, etc.)
+- name: identificador (shamura, kallamar, etc.)
 
 #### Return
 
 - value: Expr
 
-#### Expr (abstrabbito)
+#### Expr (abstrato)
 
 Subtipos:
 
 - BinaryExpr
-    operabbitor (+, -, /, % e etc)
+    operator (+, -, /, % e etc)
     left: Expr
     right: Expr
 - CallExpr
@@ -272,25 +279,6 @@ Subtipos:
 - Chamada de função inexistente
 - Uso de atributo desconhecido
 
-### Regras Específicas de Atributos
-
-#### @rhino
-
-- Função @rhino não pode:
-    chamar funções que não sejam @rhino
-    acessar variáveis externas (quando existirem)
-    chamar funções builtin impuras (print, input)
-
-RhinoImpurityError: Function marked with @rhino performs impure operabbition.
-#### @rabbit
-
-- Funções @rabbit possuem cache automático
-- Caso a função:
-    acesse funções não @rhino
-    use operações impuras
-
-RabbitImpurityWarning: @rabbit cache may be unsafe. External access detected: symbol
-
 # 3.7 Builtins
 
 ### print
@@ -298,7 +286,6 @@ RabbitImpurityWarning: @rabbit cache may be unsafe. External access detected: sy
 - print(expr);
 	Função builtin
 	Produz efeito colateral (I/O)
-	Não pode ser usada em funções @rhino
 	Retorno: indefinido (ignorado)
 
 ### input
@@ -308,4 +295,3 @@ RabbitImpurityWarning: @rabbit cache may be unsafe. External access detected: sy
 	Lê um valor do ambiente externo (entrada padrão)
 	Retorna um valor do tipo string (ou inteiro, dependendo do runtime)
 	É uma função impura
-	Não pode ser usada em funções @rhino

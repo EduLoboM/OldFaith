@@ -2,27 +2,27 @@ module Interpreter
 using Main.AST
 export execute_program
 
-const FunctionTable = Dict{String, FunctionDef}
+const RiteTable = Dict{String, RiteDef}
 
 const Environment = Dict{String, Any}
 
-const RatCache = Dict{Tuple{String, Vector{Any}}, Any}()
+const ShamuraCache = Dict{Tuple{String, Vector{Any}}, Any}()
 
-function evaluate(expr::Literal, env::Environment, funcs::FunctionTable)
+function evaluate(expr::Literal, env::Environment, rites::RiteTable)
     return expr.value
 end
 
-function evaluate(expr::Variable, env::Environment, funcs::FunctionTable)
+function evaluate(expr::Variable, env::Environment, rites::RiteTable)
     if haskey(env, expr.name)
         return env[expr.name]
     else
-        error("Erro: Variable '$(expr.name)' not found.")
+        error("Blasphemy: The spirits do not know the name '$(expr.name)'.")
     end
 end
 
-function evaluate(expr::BinaryExpression, env::Environment, funcs::FunctionTable)
-    left = evaluate(expr.left, env, funcs)
-    right = evaluate(expr.right, env, funcs)
+function evaluate(expr::BinaryExpression, env::Environment, rites::RiteTable)
+    left = evaluate(expr.left, env, rites)
+    right = evaluate(expr.right, env, rites)
     
     op = expr.operator
     if op == :+ return left + right
@@ -32,46 +32,46 @@ function evaluate(expr::BinaryExpression, env::Environment, funcs::FunctionTable
     elseif op == :% return left % right
     elseif op == :< return left < right
     elseif op == :> return left > right
-    else error("Operador desconhecido: $op")
+    else error("Forbidden Geometry: Unknown operator $op")
     end
 end
 
-function evaluate(expr::TernaryExpression, env::Environment, funcs::FunctionTable)
-    condition = evaluate(expr.condition, env, funcs)
+function evaluate(expr::TernaryExpression, env::Environment, rites::RiteTable)
+    condition = evaluate(expr.condition, env, rites)
     if condition == true
-        return evaluate(expr.true_expression, env, funcs)
+        return evaluate(expr.true_expression, env, rites)
     else
-        return evaluate(expr.false_expression, env, funcs)
+        return evaluate(expr.false_expression, env, rites)
     end
 end
 
-function evaluate(expr::CallExpression, env::Environment, funcs::FunctionTable)
-    func_name = expr.name
+function evaluate(expr::CallExpression, env::Environment, rites::RiteTable)
+    rite_name = expr.name
     
-    if !haskey(funcs, func_name)
-        error("Erro: Function '$func_name' doesn't exist.")
+    if !haskey(rites, rite_name)
+        error("False Idol: The Rite '$rite_name' has not been sanctified.")
     end
     
-    func_def = funcs[func_name]
+    rite_def = rites[rite_name]
     
-    args_values = [evaluate(arg, env, funcs) for arg in expr.arguments]
+    args_values = [evaluate(arg, env, rites) for arg in expr.arguments]
     
-    use_cache = "rabbit" in func_def.attributes
-    cache_key = (func_name, args_values)
+    use_cache = "shamura" in rite_def.attributes
+    cache_key = (rite_name, args_values)
     
-    if use_cache && haskey(RatCache, cache_key)
-        return RatCache[cache_key]
+    if use_cache && haskey(ShamuraCache, cache_key)
+        return ShamuraCache[cache_key]
     end
 
     new_env = Environment()
-    for (i, param_name) in enumerate(func_def.params)
+    for (i, param_name) in enumerate(rite_def.params)
         new_env[param_name] = args_values[i]
     end
     
-    result = evaluate(func_def.body, new_env, funcs)
+    result = evaluate(rite_def.body, new_env, rites)
     
     if use_cache
-        RatCache[cache_key] = result
+        ShamuraCache[cache_key] = result
     end
     
     return result
@@ -79,14 +79,14 @@ end
 
 function execute_program(program::Program)
 
-    funcs = FunctionTable()
-    for f in program.functions
-        funcs[f.name] = f
+    rites = RiteTable()
+    for r in program.rites
+        rites[r.name] = r
     end
     
-    empty!(RatCache)
+    empty!(ShamuraCache)
     
-    return funcs
+    return rites
 end
 
 end

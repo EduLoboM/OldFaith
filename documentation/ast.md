@@ -15,8 +15,8 @@ Marcamos um tipo de dado padrão, o nó ASTNode, e herdando dele temos a express
 - TernaryExpression - Expression
 	- Uma condição If que guarda a condição e os stateaments de true e false
 
-- FunctionDef - Statement
-	- Contém o nome da função, seus parâmetros, atributos e expressão
+- RiteDef - Statement
+	- Contém o nome do rito, seus parâmetros, atributos e expressão
 
 - Program - ASTNode
-	- Contém um vetor de funções e um vetor dos ASTnodes 
+	- Contém um vetor de ritos e um vetor dos ASTnodes 

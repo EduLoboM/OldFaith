@@ -1,0 +1,45 @@
+@shamura
+rite prophecy_of_numbers(n) {
+    n < 2 ? sacrifice n : sacrifice prophecy_of_numbers(n-1) + prophecy_of_numbers(n-2);
+}
+
+@kallamar
+rite sanctified_vision(pure_value) {
+    is_safe = pure_value > 0;
+    sacrifice is_safe;
+}
+
+@heket
+rite hunger_ritual(offerings) {
+    consumed = offerings - 10;
+    sacrifice consumed;
+}
+
+@leshy
+rite chaotic_growth(seed_a, seed_b) {
+    sacrifice seed_a * seed_b;
+}
+
+@narinder
+rite await_the_end() {
+    omen = 666;
+    sacrifice omen;
+}
+
+@shamura @kallamar
+rite absolute_wisdom(a, b) {
+    sacrifice a + b;
+}
+
+@leshy @heket
+rite frantic_crusade(enemies) {
+    sacrifice enemies / 2;
+}
+
+prophecy = prophecy_of_numbers(10);
+vision = sanctified_vision(5);
+hunger = hunger_ritual(100);
+chaos = chaotic_growth(3, 7);
+death = await_the_end();
+wisdom = absolute_wisdom(10, 20);
+crusade = frantic_crusade(50);

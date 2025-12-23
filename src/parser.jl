@@ -23,7 +23,7 @@ function next(p::ParserState, type::TokenType)
         p.pos += 1
         return t
     else
-        error("Syntax error in line $(t.line): Expected $type, found $(t.type)")
+        error("Heresy in line $(t.line): Expected $type, found $(t.type). The Lamb is displeased.")
     end
 end
 
@@ -62,7 +62,7 @@ function parse_factor(p::ParserState)
         end
         
     else
-        error("Parsing error in line $(t.line): Expected number or identifier, found $(t.type)")
+        error("Scripture unclear in line $(t.line): Expected number or identifier, found $(t.type).")
     end
 end
 
@@ -127,7 +127,7 @@ function parse_expression(p::ParserState)
 end
 
 
-function parse_function(p::ParserState)
+function parse_rite(p::ParserState)
     attributes = String[]
     while current(p).type == TOKEN_AT
         next(p, TOKEN_AT)
@@ -135,7 +135,7 @@ function parse_function(p::ParserState)
         push!(attributes, attr_name)
     end
 
-    next(p, TOKEN_FUNC)
+    next(p, TOKEN_RITE)
     name = next(p, TOKEN_IDENT).value
     
     next(p, TOKEN_LPAREN)
@@ -150,32 +150,32 @@ function parse_function(p::ParserState)
     next(p, TOKEN_RPAREN)
 
     next(p, TOKEN_LBRACE)
-    next(p, TOKEN_RETURN)
+    next(p, TOKEN_SACRIFICE)
     
     body_expr = parse_expression(p)
     
     next(p, TOKEN_SEMICOLON)
     next(p, TOKEN_RBRACE)
 
-    return FunctionDef(name, params, attributes, body_expr)
+    return RiteDef(name, params, attributes, body_expr)
 end
 
 
 function parse_program(tokens::Vector{Token})
     p = ParserState(tokens, 1)
     
-    functions = FunctionDef[]
+    rites = RiteDef[]
     script = ASTNode[]
 
     while current(p).type != TOKEN_EOF
-        if current(p).type == TOKEN_AT || current(p).type == TOKEN_FUNC
-            push!(functions, parse_function(p))
+        if current(p).type == TOKEN_AT || current(p).type == TOKEN_RITE
+            push!(rites, parse_rite(p))
         else
             break 
         end
     end
 
-    return Program(functions, script)
+    return Program(rites, script)
 end
 
 end
